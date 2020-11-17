@@ -49,7 +49,7 @@ FROM lekvarok
                 {
                     while (reader.Read())
                     {
-                        int emeret = reader.GetInt32(0);
+                        var emeret = reader.GetValue(0);
                         string etipus = reader.GetString(1);
                         Console.WriteLine("{0} L - {1} lekvár", emeret, etipus);
                     }
@@ -60,29 +60,29 @@ FROM lekvarok
                 //kiírja az összes lekvár mennyiségét literben
                 var sumcomm = conn.CreateCommand();
                 sumcomm.CommandText = @"
-SELECT sum(meret) FROM `lekvarok
+SELECT sum(uveg_meret) FROM lekvarok
 ";
 
-                int osszeslekvar = sumcomm.ExecuteNonQuery();
+                var osszeslekvar = sumcomm.ExecuteNonQuery();
                 Console.WriteLine(osszeslekvar);
 
                 //kiírja fajtánként a mennyiséget
                 var fajta_mennyiseg = conn.CreateCommand();
                 fajta_mennyiseg.CommandText = @"
-SELECT tipus, count(tipus) FROM lekvarok
-group by tipus
+SELECT lekvar_tipus, count(lekvar_tipus) FROM lekvarok
+group by lekvar_tipus
 ";
 
 
-                int fajtamennyiseg = fajta_mennyiseg.ExecuteNonQuery();
+                var fajtamennyiseg = fajta_mennyiseg.ExecuteNonQuery();
                 Console.WriteLine(fajtamennyiseg);
 
                 //kiírja az átlagos üvegméretet
                 var atlag = conn.CreateCommand();
                 atlag.CommandText = @"
-SELECT AVG(meret) FROM lekvarok 
+SELECT AVG(uveg_meret) FROM lekvarok 
 ";
-                int atlagmeret = atlag.ExecuteNonQuery();
+                var atlagmeret = atlag.ExecuteNonQuery();
                 Console.WriteLine(atlagmeret);
 
                 Console.ReadLine();
