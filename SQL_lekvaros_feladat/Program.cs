@@ -7,7 +7,7 @@ namespace SQLConsoleApp
     {
         static void Main(string[] args)
         {
-
+            //c
             using (var conn = new SQLiteConnection("Data Source=mydb.db"))
             {
                 conn.Open();
