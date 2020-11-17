@@ -66,7 +66,7 @@ SELECT sum(meret) FROM `lekvarok
                 int osszeslekvar = sumcomm.ExecuteNonQuery();
                 Console.WriteLine(osszeslekvar);
 
-                var fajta_mennyiseg = conn.CreateCommand()
+                var fajta_mennyiseg = conn.CreateCommand();
                 fajta_mennyiseg.CommandText = @"
 SELECT tipus, count(tipus) FROM `lekvarok`
 group by tipus
