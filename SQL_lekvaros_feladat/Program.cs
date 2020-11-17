@@ -54,8 +54,20 @@ FROM lekvarok
                         Console.WriteLine("{0} L - {1} lekvár", emeret, etipus);
                     }
                 }
-
                 Console.WriteLine(erintettSorok);
+
+
+
+                var sumcomm = conn.CreateCommand();
+                sumcomm.CommandText = @"
+SELECT sum(meret) FROM `lekvarok
+";
+
+                int osszeslekvar = sumcomm.ExecuteNonQuery();
+                Console.WriteLine(osszeslekvar);
+
+
+
 
                 Console.ReadLine();
 
